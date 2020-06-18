@@ -15,15 +15,23 @@ Role Variables
 `libvirt_host_pools` is a list of pools to define and start. Each item
 should be a dict containing the following items:
 - `name` The name of the pool.
-- `type` The type of the pool, currently only `dir` and `lvm2` are supported.
+- `type` The type of the pool, currently only `dir` and `logical` are
+  supported. `lvm2` is supported as an alias for `logical`, but this alias is
+  deprecated and will be removed in a future release.
 - `capacity`  The capacity, in bytes, of the pool. (optional)
 - `path` The absolute path to the pool's backing directory.
 - `mode` The access mode of the pool. N.B.: This should be specified as an
   integer **without** a leading zero; for example: `mode: 755`. (only `dir`)
 - `owner` The owner of the pool. (only `dir`)
 - `group` The group of the pool. (only `dir`)
+<<<<<<< HEAD
 - `source` The name of the volume group. (only `lvm2`)
 - `pvs` A list of physical volumes the volume group consists of. (only `lvm2`). N.B. if specified, the lvg will be created on top of the PVS, otherwise the lv should have been created before.
+=======
+- `source` The name of the volume group. (only when type is `logical`)
+- `pvs` A list of physical volumes the volume group consists of. (only when
+  type is `logical`)
+>>>>>>> 166f66c (Allow pool type to be 'logical', deprecate 'lvm2')
 
 `libvirt_host_networks` is a list of networks to define and start. Each item
 should be a dict containing the following items:

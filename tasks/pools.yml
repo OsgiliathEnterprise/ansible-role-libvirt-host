@@ -18,6 +18,17 @@
   with_items: "{{ libvirt_host_pools }}"
   become: True
 
+<<<<<<< HEAD
+=======
+- name: Ensure libvirt LVM storage pool directories exist
+  lvg:
+    vg: "{{ item.source }}"
+    pvs: "{{ item.pvs }}"
+  when: item.type in ["lvm2", "logical"]
+  with_items: "{{ libvirt_host_pools }}"
+  become: True
+
+>>>>>>> 166f66c (Allow pool type to be 'logical', deprecate 'lvm2')
 - name: Ensure libvirt storage pools are defined
   virt_pool:
     name: "{{ item.name }}"
