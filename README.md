@@ -15,7 +15,7 @@ Role Variables
 `libvirt_host_pools` is a list of pools to define and start. Each item
 should be a dict containing the following items:
 - `name` The name of the pool.
-- `type` The type of the pool, currently only `dir` and `logical` are
+- `type` The type of the pool, currently only `dir`, `logical` and `rbd` are
   supported. `lvm2` is supported as an alias for `logical`, but this alias is
   deprecated and will be removed in a future release.
 - `capacity`  The capacity, in bytes, of the pool. (optional)
@@ -24,14 +24,13 @@ should be a dict containing the following items:
   integer **without** a leading zero; for example: `mode: 755`. (only `dir`)
 - `owner` The owner of the pool. (only `dir`)
 - `group` The group of the pool. (only `dir`)
-<<<<<<< HEAD
-- `source` The name of the volume group. (only `lvm2`)
-- `pvs` A list of physical volumes the volume group consists of. (only `lvm2`). N.B. if specified, the lvg will be created on top of the PVS, otherwise the lv should have been created before.
-=======
-- `source` The name of the volume group. (only when type is `logical`)
+- `source` The name of the volume group (when type is `logical`) or RBD pool
+  (when type is `rbd`).
 - `pvs` A list of physical volumes the volume group consists of. (only when
   type is `logical`)
->>>>>>> 166f66c (Allow pool type to be 'logical', deprecate 'lvm2')
+- `hosts` The list of the Ceph monitors IPs or hostnames. (only `rbd`)
+- `username` The username used for RADOS authentification. (only `rbd`)
+- `passphrase` The passphrase used for RADOS authentification. (only `rbd`)
 
 `libvirt_host_networks` is a list of networks to define and start. Each item
 should be a dict containing the following items:
@@ -115,6 +114,16 @@ Example Playbook
             - name: lvm_pool
               type: lvm2
               source: libvirtvg
+            - name: rbd-pool
+              type: rbd
+              source: rbd
+              hosts:
+                - 192.168.42.200
+                - 192.168.42.204
+                - 192.168.42.208
+              username: admin
+              passphrase: xxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+
           libvirt_host_networks:
             - name: br-example
               mode: bridge
