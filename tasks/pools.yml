@@ -16,7 +16,7 @@
     state: directory
   when: item.type == "dir"
   loop: "{{ libvirt_host_pools | flatten(levels=1) }}"
-  become: true
+  become: True
 
 - include_tasks:
     file: rbd.yml
