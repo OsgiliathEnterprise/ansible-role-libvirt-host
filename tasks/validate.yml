@@ -1,6 +1,6 @@
 ---
-- name: Verify that Virtualization Technology (VT) is enabled on x86_64
-  command: grep -c -E 'svm|vmx' /proc/cpuinfo
+- name: erify that Virtualization Technology (VT) is enabled on x86_64
+  ansible.builtin.command: grep -c -E 'svm|vmx' /proc/cpuinfo
   check_mode: False
   changed_when: False
   failed_when: False
@@ -14,7 +14,7 @@
   when: libvirt_host_arch != 'x86_64'
 
 - name: Set a fact about whether Virtualization Technology (VT) is enabled
-  set_fact:
+  ansible.builtin.set_fact:
     libvirt_host_vt_enabled: >-
       {{
         (x86_vt_result.rc == 0)
@@ -23,7 +23,7 @@
       }}
 
 - name: Notify if Virtualization Technology (VT) is disabled
-  debug:
+  ansible.builtin.debug:
     msg: >
       Virtualization Technology (VT) is currently disabled. Please enable VT
       before running this role again.
@@ -32,7 +32,7 @@
     - not libvirt_host_vt_enabled
 
 - name: Fail if Virtualization Technology (VT) is disabled
-  fail:
+  ansible.builtin.fail:
     msg: >
       Virtualization Technology (VT) is currently disabled. Please enable VT
       before running this role again.
@@ -41,7 +41,7 @@
     - not libvirt_host_vt_enabled
 
 - name: Fail if SASL password is not defined
-  fail:
+  ansible.builtin.fail:
     msg: >
       One or more SASL passwords in 'libvirt_host_sasl_credentials' are not
       defined
