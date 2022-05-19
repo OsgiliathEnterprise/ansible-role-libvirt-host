@@ -27,6 +27,7 @@ libvirt_host_packages_efi_by_version:
     - edk2-ovmf
   10:
     - edk2-ovmf
+  35: [] # fedora
 
 libvirt_host_packages_efi_aarch64: >-
   {{ [] if ansible_facts.distribution_major_version | int == 7 else ['edk2-aarch64'] }}
@@ -62,6 +63,7 @@ libvirt_host_custom_yum_repos_efi_by_version:
   8: []
   9: []
   10: []
+  35: [] # Fedora :-)
 
 libvirt_host_custom_yum_repos: >-
   {{
