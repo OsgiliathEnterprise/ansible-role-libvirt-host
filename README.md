@@ -38,6 +38,7 @@ should be a dict containing the following items:
 - `mode` The forwarding mode of the network, `bridge`, `route`, `open` and `nat` are
   supported. Leave empty for a isolated network mode.
 - `bridge` The name of the bridge interface for this network.
+- `zone` the firewalld zone for the bridge (defaults to public)  
 - `ip` IP address of the virtual bridge, mandatory for `route`, `open` and `nat` mode.
 - `netmask` Netmask of the virtual bridge, mandatory for `route`, `open` and `nat` mode.
 - `domain` DNS domain name for `route`, `open` and `nat` mode, default to the network
