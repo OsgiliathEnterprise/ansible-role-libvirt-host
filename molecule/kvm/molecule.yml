@@ -38,8 +38,8 @@ provisioner:
     vvv: True
   config_options:
     defaults:
+      remote_tmp: /tmp
       forks: 20
-      remote_tmp: /home/tmp
     ssh_connection:
       pipelining: true
 verifier:
