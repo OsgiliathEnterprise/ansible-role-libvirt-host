@@ -29,13 +29,12 @@ platforms:
       cpus: 2
       memory: 2048
     provider_raw_config_args:
-      - "storage :file, :size => '15G', :device => 'vdb'"
+      - "storage :file, :size => '3G', :device => 'vdb'"
 provisioner:
   name: ansible
   env:
     ANSIBLE_COLLECTIONS_PATH: "${MOLECULE_PROJECT_DIRECTORY}/../community-collections:${HOME}/.ansible/collections:/usr/share/ansible/collections"
-  options:
-    vvv: True
+    ANSIBLE_VERBOSITY: 2
   config_options:
     defaults:
       remote_tmp: /tmp
