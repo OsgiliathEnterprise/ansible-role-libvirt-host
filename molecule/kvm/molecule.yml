@@ -30,6 +30,10 @@ platforms:
       memory: 2048
     provider_raw_config_args:
       - "storage :file, :size => '3G', :device => 'vdb'"
+    interfaces:
+      - auto_config: true
+        network_name: private_network
+        ip: "192.168.50.4"
 provisioner:
   name: ansible
   env:
