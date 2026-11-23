@@ -165,3 +165,6 @@ libvirt_host_vnc_tls_enabled: false
 
 # Whether to configure AppArmor for directory storage pools.
 libvirt_host_configure_apparmor: "{{ libvirt_host_install_daemon | bool }}"
+
+libvirt_host_nvidia_card_egl: false
+libvirt_host_qemu_egl_group: render

@@ -1,5 +1,5 @@
 ---
-- name: erify that Virtualization Technology (VT) is enabled on x86_64
+- name: Verify that Virtualization Technology (VT) is enabled on x86_64
   ansible.builtin.command: grep -c -E 'svm|vmx' /proc/cpuinfo
   check_mode: False
   changed_when: False
@@ -12,6 +12,10 @@
     path: /dev/kvm
   register: kvm_device
   when: libvirt_host_arch != 'x86_64'
+
+- name:  Validate | Display the result of the VT check
+  ansible.builtin.debug:
+    var: result
 
 - name: Set a fact about whether Virtualization Technology (VT) is enabled
   ansible.builtin.set_fact:

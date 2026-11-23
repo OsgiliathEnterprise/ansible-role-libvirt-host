@@ -7,3 +7,12 @@ vnc_tls_x509_verify=1
 {# While the value is not JSON formatted, it is close enough - strings need to be double quoted. #}
 {{ key }} = {{ value | to_json }}
 {% endfor %}
+{% if libvirt_host_nvidia_card_egl | bool %}
+cgroup_device_acl = [
+"/dev/null", "/dev/full", "/dev/zero",
+"/dev/random", "/dev/urandom",
+"/dev/ptmx", "/dev/kvm",
+"/dev/dri/card0", "/dev/dri/renderD128",
+"/dev/nvidia0", "/dev/nvidiactl", "/dev/nvidia-modeset"
+]
+{% endif %}

@@ -21,6 +21,15 @@
   notify:
     - restart libvirt
 
+- name: Set render group to qemu user if nvidia GPU is present
+  ansible.builtin.user:
+    append: true
+    name: "{{ libvirt_host_qemu_user }}"
+    groups:
+     - "{{ libvirt_host_qemu_egl_group }}"
+    state: present
+  when: libvirt_host_nvidia_card_egl | bool
+
 - name: Ensure configuration files exist
   ansible.builtin.template:
     src: "{{ item.src }}"
